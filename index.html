@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__wrapper container">
+            <button>
+                <img src="./img/menu-icon.svg" alt="menu-icon">
+            </button>
+            <p>Текст</p>
+        </div>
+        <div class="header__lines">
+            <div class="header__lines-wrapper">
+                <div class="header__left-line"></div>
+                <div class="header__right-line"></div>
+            </div>
+            <div class="header__progress-bar js-progress-bar"></div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <div class="main__slider-content container">
+                <h2>Слайдер</h2>
+                <div class="main__slider-wrapper">
+                    <ul class="main__slides js-slides-list">
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/first-slide.png" alt="first-slide">
+                                <h3>Текст 1</h3>
+                            </div>
+                        </li>
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/second-slide.png" alt="second-slide">
+                                <h3>Текст 2</h3>
+                            </div>
+                        </li>
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/third-slide.png" alt="third-slide">
+                                <h3>Текст 3</h3>
+                            </div>
+                        </li>
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/thourth-slide.png" alt="thourth-slide">
+                                <h3>Текст 4</h3>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="main__slider-pagination">
+                        <button class="main__slider-prev-btn js-prev-btn">
+                            <img src="./img/prev-btn-icon.svg" alt="prev-btn">
+                        </button>
+                        <ul class="main__slides-list js-slides-items"></ul>
+                        <button class="main__slider-next-btn js-next-btn active">
+                            <img src="./img/next-btn-icon.svg" alt="next-btn">
+                        </button>
+                    </div>
+                </div>
+                <button class="main__button-continue js-continue-btn" disabled>Продолжить</button>
+            </div>
+
+        </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__lines-wrapper">
+            <div class="footer__left-line"></div>
+            <div class="footer__right-line"></div>
+        </div>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

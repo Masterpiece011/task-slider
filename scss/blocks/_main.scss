@@ -1,0 +1,157 @@
+.main {
+    width: 100%;
+    padding: 30px 0 21px;
+
+}
+
+.main__slider-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__slider-content h2 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 34px;
+}
+
+.main__slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(194, 195, 198, 1);
+    position: relative;
+}
+
+.main__slides {
+    width: calc(960px * 4);
+    height: 338px;
+    background-color: #fff;
+    display: flex;
+    position: relative;
+    transition: all 1s ease;
+    left: 0;
+}
+
+.main__slide {
+    width: 960px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.main__slide_wrapper {
+    align-self: center;
+    min-height: 229px;
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.main__slide_wrapper img {
+    width: 305px;
+}
+
+.main__slide_wrapper h3 {
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+
+.main__slider-pagination {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(233, 38, 45, 1);
+}
+
+.main__slides-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.main__slides-item {
+    display: block;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.25;
+    height: 7px;
+    width: 7px;
+    margin-right: 4px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.main__slides-item:last-child {
+    margin-right: 0;
+}
+
+.main__slides-item.active {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.main__slider-pagination button {
+    background-color: transparent;
+    border: none;
+    opacity: 0.2;
+    transition: all .2s ease;
+}
+
+.main__slider-pagination button.active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.main__button-continue {
+    width: 189px;
+    align-self: center;
+    margin-top: 21px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 14px 45px;
+    background-color: rgba(28, 26, 26, 0.15);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: not-allowed;
+    transition: all .3s ease;
+}
+
+.main__button-continue.active {
+    background-color: #fff;
+    animation-name: changeColor;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    cursor: pointer;
+}
+
+.main__button-continue.active:hover {
+    background-color: #73BE43;
+}
+
+.main__button-continue.active:hover:active {
+    background-color: #92e161;
+    transition: all .02s linear;
+}
+
+@keyframes changeColor {
+    from {
+        background-color: rgba(28, 26, 26, 0.15);
+    } 
+    to {
+        background-color: #fff;
+    }
+}

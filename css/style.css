@@ -1,0 +1,301 @@
+@import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: "Golos Text", sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__wrapper {
+  box-sizing: border-box;
+  padding: 16px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.header__wrapper button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__wrapper p {
+  margin-left: 28px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.header__lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__lines-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__left-line,
+.header__right-line {
+  height: 1px;
+  width: 500px;
+}
+
+.header__left-line {
+  background-color: #E9262D;
+}
+
+.header__right-line {
+  background-color: #73BE43;
+}
+
+.header__progress-bar {
+  height: 5px;
+  background-color: #E9262D;
+  transition: all 0.7s ease;
+  width: 0;
+}
+
+.main {
+  width: 100%;
+  padding: 30px 0 21px;
+}
+
+.main__slider-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__slider-content h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 34px;
+}
+
+.main__slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgb(194, 195, 198);
+  position: relative;
+}
+
+.main__slides {
+  width: 3840px;
+  height: 338px;
+  background-color: #fff;
+  display: flex;
+  position: relative;
+  transition: all 1s ease;
+  left: 0;
+}
+
+.main__slide {
+  width: 960px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main__slide_wrapper {
+  align-self: center;
+  min-height: 229px;
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.main__slide_wrapper img {
+  width: 305px;
+}
+
+.main__slide_wrapper h3 {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.main__slider-pagination {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(233, 38, 45);
+}
+
+.main__slides-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.main__slides-item {
+  display: block;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.25;
+  height: 7px;
+  width: 7px;
+  margin-right: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main__slides-item:last-child {
+  margin-right: 0;
+}
+
+.main__slides-item.active {
+  background-color: #fff;
+  opacity: 1;
+}
+
+.main__slider-pagination button {
+  background-color: transparent;
+  border: none;
+  opacity: 0.2;
+  transition: all 0.2s ease;
+}
+
+.main__slider-pagination button.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.main__button-continue {
+  width: 189px;
+  align-self: center;
+  margin-top: 21px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 14px 45px;
+  background-color: rgba(28, 26, 26, 0.15);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.main__button-continue.active {
+  background-color: #fff;
+  animation-name: changeColor;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  cursor: pointer;
+}
+
+.main__button-continue.active:hover {
+  background-color: #73BE43;
+}
+
+.main__button-continue.active:hover:active {
+  background-color: #92e161;
+  transition: all 0.02s linear;
+}
+
+@keyframes changeColor {
+  from {
+    background-color: rgba(28, 26, 26, 0.15);
+  }
+  to {
+    background-color: #fff;
+  }
+}
+.footer {
+  width: 100%;
+}
+
+.footer__lines-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__left-line,
+.footer__right-line {
+  height: 5px;
+  width: 500px;
+}
+
+.footer__left-line {
+  background-color: #E9262D;
+}
+
+.footer__right-line {
+  background-color: #73BE43;
+}/*# sourceMappingURL=style.css.map */
