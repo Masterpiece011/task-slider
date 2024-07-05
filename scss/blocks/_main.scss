@@ -23,13 +23,15 @@
     overflow: hidden;
     border: 1px solid rgba(194, 195, 198, 1);
     position: relative;
+    margin-bottom: 21px;
 }
 
 .main__slides {
-    width: calc(960px * 4);
-    height: 338px;
+    min-width: 960px;
+    min-height: 338px;
     background-color: #fff;
     display: flex;
+    align-items: center;
     position: relative;
     transition: all 1s ease;
     left: 0;
@@ -116,7 +118,6 @@
 .main__button-continue {
     width: 189px;
     align-self: center;
-    margin-top: 21px;
     box-sizing: border-box;
     border-radius: 8px;
     padding: 14px 45px;

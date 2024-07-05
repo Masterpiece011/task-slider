@@ -28,7 +28,7 @@
         <div class="container">
             <div class="main__slider-content container">
                 <h2>Слайдер</h2>
-                <div class="main__slider-wrapper">
+                <div class="main__slider-wrapper js-slider active">
                     <ul class="main__slides js-slides-list">
                         <li class="main__slide js-slide">
                             <div class="main__slide_wrapper">
@@ -65,6 +65,37 @@
                         </button>
                     </div>
                 </div>
+                <div class="main__slider-wrapper js-slider">
+                    <ul class="main__slides js-slides-list">
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/first-slide.png" alt="first-slide">
+                                <h3>Текст 1</h3>
+                            </div>
+                        </li>
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/second-slide.png" alt="second-slide">
+                                <h3>Текст 2</h3>
+                            </div>
+                        </li>
+                        <li class="main__slide js-slide">
+                            <div class="main__slide_wrapper">
+                                <img src="./img/third-slide.png" alt="third-slide">
+                                <h3>Текст 3</h3>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="main__slider-pagination">
+                        <button class="main__slider-prev-btn js-prev-btn">
+                            <img src="./img/prev-btn-icon.svg" alt="prev-btn">
+                        </button>
+                        <ul class="main__slides-list js-slides-items"></ul>
+                        <button class="main__slider-next-btn js-next-btn active">
+                            <img src="./img/next-btn-icon.svg" alt="next-btn">
+                        </button>
+                    </div>
+                </div>
                 <button class="main__button-continue js-continue-btn" disabled>Продолжить</button>
             </div>
 
@@ -78,7 +109,7 @@
         </div>
     </footer>
 
-    <script type="module" src="./js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

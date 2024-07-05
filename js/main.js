@@ -1,57 +1,62 @@
 "use strict"
 
 const allSlidesIds = []
-let pickedSlidesIds = [0]
+let pickedSlidesIds = []
 
 let currentSlide = 0
 let offset = 0
 let slideWidth = 960
 
+let currentSliderContent = []
+let currentSliderItems = []
+let currentSliderElems = []
+
 const continueBtn = document.querySelector(".js-continue-btn")
 const progressBarElem = document.querySelector(".js-progress-bar")
 
-const slidesList = document.querySelector(".js-slides-list")
-const allSlidesElems = document.querySelectorAll(".js-slide")
-const allSlidesItemsElems = document.querySelectorAll(".js-slides-item")
-const slidesItemsContainer = document.querySelector(".js-slides-items")
+const allSliders = document.querySelectorAll(".js-slider")
 
-const prevSlideBtn = document.querySelector(".js-prev-btn")
-const nextSlideBtn = document.querySelector(".js-next-btn")
-
-
-function pickedSlidesChecker() {
-    if (!pickedSlidesIds.includes(currentSlide)) {
-        pickedSlidesIds.push(currentSlide)
+function pickedSlidesChecker(pickedSlidesCount, allSlidesItems) {
+    for (let id = 0; id < allSlidesItems.length; id++) {
+        if (allSlidesItems[id].classList.contains("active") && !pickedSlidesCount.includes(id)) {
+            pickedSlidesCount.push(id)
+        }
     }
 }
 
-function pickCurrentSlide() {
-    currentSlide == 0 ? prevSlideBtn.classList.remove('active') : prevSlideBtn.classList.add('active')
-    currentSlide == allSlidesIds.length - 1 ? nextSlideBtn.classList.remove('active') : nextSlideBtn.classList.add('active')
+function pickCurrentSlide(countOfSliderContent) {
+    let currentPrevBtn = document.querySelector(".js-slider.active .js-prev-btn")
+    let currentNextBtn = document.querySelector(".js-slider.active .js-next-btn")
+    let currentSlidesList = document.querySelector(".js-slider.active .js-slides-list")
+
+    currentSlide == 0 ? currentPrevBtn.classList.remove('active') : currentPrevBtn.classList.add('active')
+    currentSlide == countOfSliderContent - 1 ? currentNextBtn.classList.remove('active') : currentNextBtn.classList.add('active')
     offset = -slideWidth * currentSlide
-    slidesList.style.left = offset + "px"
+    currentSlidesList.style.left = offset + "px"
 }
 
 function refreshCurrentSlideItems() {
-    const allSlidesItemsElems = document.querySelectorAll(".js-slides-item")
-    allSlidesItemsElems.forEach(slideItem => {
+    let allCurrentSlidesItems = document.querySelectorAll(".js-slider.active .js-slides-item")
+    allCurrentSlidesItems.forEach(slideItem => {
         slideItem.classList.remove("active")
     })
-    allSlidesItemsElems[currentSlide].classList.add("active")
+    allCurrentSlidesItems[currentSlide].classList.add("active")
 }
 
 function refreshProgressBar(countPickedSlides) {
+    let bgColor = ""
     if (countPickedSlides > (allSlidesIds.length / 2)) {
-        progressBarElem.style.backgroundColor = "#ffd43f"
+        bgColor = "#ffd43f"
     }
     if (countPickedSlides == allSlidesIds.length) {
-        progressBarElem.style.backgroundColor = "#73BE43"
+        bgColor = "#73BE43"
     }
+    progressBarElem.style.backgroundColor = bgColor
     progressBarElem.style.width = countPickedSlides * (1000 / allSlidesIds.length) + "px"
 }
 
-function isReadyToContinue() {
-    if (pickedSlidesIds.length == allSlidesIds.length) {
+function isReadyToContinue(countPickedSlides, countAllSlides) {
+    if (countPickedSlides == countAllSlides) {
         continueBtn.removeAttribute("disabled")
         continueBtn.classList.add("active")
     }
@@ -59,85 +64,131 @@ function isReadyToContinue() {
 
 function getCurrentSlideId() {
     let activeSlideId = 0
+    let currentSliderItems = document.querySelectorAll(".js-slider.active .js-slides-item")
 
-    const allSlidesItemsElems = document.querySelectorAll(".js-slides-item")
-
-    for (let id = 0; id < allSlidesItemsElems.length; id++) {
-        if (allSlidesItemsElems[id].classList.contains("active")) {
+    for (let id = 0; id < currentSliderItems.length; id++) {
+        if (currentSliderItems[id].classList.contains("active")) {
             activeSlideId = id
         }
     }
     return activeSlideId
 }
 
-function nextSlide() {
-    if (offset > (-slideWidth * (allSlidesElems.length - 1))) {
+function refreshSlider() {
+    pickedSlidesChecker(pickedSlidesIds, allSlidesItemsElems)
+    refreshProgressBar(pickedSlidesIds.length)
+    isReadyToContinue(pickedSlidesIds.length, allSlidesIds.length)
+}
+
+function nextSlide(countOfSlides) {
+    offset = -slideWidth * currentSlide
+    if (offset > (-slideWidth * (countOfSlides - 1))) {
+        let currentSlidesList = document.querySelector(".js-slider.active .js-slides-list")
+        let currentPrevBtn = document.querySelector(".js-slider.active .js-prev-btn")
+        let currentNextBtn = document.querySelector(".js-slider.active .js-next-btn")
+
         currentSlide += 1
-        offset = offset - slideWidth
-        slidesList.style.left = offset + "px"
-        currentSlide == 0 ? prevSlideBtn.classList.remove('active') : prevSlideBtn.classList.add('active')
-        currentSlide == allSlidesIds.length - 1 ? nextSlideBtn.classList.remove('active') : nextSlideBtn.classList.add('active')
-        pickedSlidesChecker()
+        offset = -slideWidth * currentSlide
+        currentSlidesList.style.left = offset + "px"
+        
+        currentSlide == 0 ? currentPrevBtn.classList.remove('active') : currentPrevBtn.classList.add('active')
+        currentSlide == countOfSlides - 1 ? currentNextBtn.classList.remove('active') : currentNextBtn.classList.add('active')
         refreshCurrentSlideItems()
-        refreshProgressBar(pickedSlidesIds.length)
-        isReadyToContinue()
+        refreshSlider()
     }
 }
 
-function prevSlide() {
+function prevSlide(countOfSlides) {
+    offset = -slideWidth * currentSlide
     if (offset < 0) {
+        let currentSlidesList = document.querySelector(".js-slider.active .js-slides-list")
+        let currentPrevBtn = document.querySelector(".js-slider.active .js-prev-btn")
+        let currentNextBtn = document.querySelector(".js-slider.active .js-next-btn")
+
         currentSlide -= 1
-        offset = offset + slideWidth
-        slidesList.style.left = offset + "px"
-        currentSlide == 0 ? prevSlideBtn.classList.remove('active') : prevSlideBtn.classList.add('active')
-        currentSlide == allSlidesIds.length ? nextSlideBtn.classList.remove('active') : nextSlideBtn.classList.add('active')
-        pickedSlidesChecker()
+        offset = -slideWidth * currentSlide
+        currentSlidesList.style.left = offset + "px"
+
+        currentSlide == 0 ? currentPrevBtn.classList.remove('active') : currentPrevBtn.classList.add('active')
+        currentSlide == countOfSlides ? currentNextBtn.classList.remove('active') : currentNextBtn.classList.add('active')
+        
         refreshCurrentSlideItems()
-        refreshProgressBar(pickedSlidesIds.length)
-        isReadyToContinue()
+        refreshSlider()
     }
 }
 
-function renderSlidesItems() {
-    for (let i = 0; i < allSlidesIds.length; i++) {
+function renderSlidesItems(countOfSlides, sliderListEl) {
+    for (let i = 0; i < countOfSlides; i++) {
         let slideItem = document.createElement("li")
         slideItem.classList.add("main__slides-item")
         slideItem.classList.add("js-slides-item")
         if (i == 0) {
             slideItem.classList.add("active")
         }
-        slidesItemsContainer.appendChild(slideItem)
+        sliderListEl.appendChild(slideItem)
     }
+}
 
-    const allSlidesItemsElems = document.querySelectorAll(".js-slides-item")
+function clearActiveSliders() {
+    allSliders.forEach(slider => {
+        slider.classList.remove("active")
+    })
+}
 
-    allSlidesItemsElems.forEach(slideItem => {
+allSliders.forEach(slider => {
+    slider.addEventListener("mouseover", () => {
+        if (!slider.classList.contains("active")) {
+            clearActiveSliders()
+            slider.classList.add("active")
+
+            currentSlide = getCurrentSlideId()
+            currentSliderContent = slider.querySelectorAll(".js-slide")
+            currentSliderItems = currentSliderContent.length
+            currentSliderElems = slider.querySelectorAll(".js-slides-item")
+        }
+    })
+
+    currentSliderContent = slider.querySelectorAll(".js-slide")
+    currentSliderItems = currentSliderContent.length
+
+    let sliderContainer = slider.querySelector(".js-slides-items")
+    const sliderList = slider.querySelector(".js-slides-list")
+    sliderList.style.width = currentSliderItems * slideWidth + "px"
+
+    renderSlidesItems(currentSliderItems, sliderContainer)
+
+    currentSliderElems = slider.querySelectorAll(".js-slides-item")
+
+    currentSliderElems.forEach(slideItem => {
         slideItem.addEventListener("click", () => {
-            document.querySelectorAll(".js-slides-item").forEach(slideItem => {
+            slider.querySelectorAll(".js-slides-item").forEach(slideItem => {
                 slideItem.classList.remove("active")
             })
             slideItem.classList.add("active")
             currentSlide = getCurrentSlideId()
-            pickCurrentSlide()
-            pickedSlidesChecker()
-            refreshProgressBar(pickedSlidesIds.length)
-            isReadyToContinue()
+            pickCurrentSlide(currentSliderItems)
+            refreshSlider()
         })
     })
-}
 
-nextSlideBtn.addEventListener("click", () => {
-    nextSlide()
+    const prevSlideBtn = slider.querySelector(".js-prev-btn")
+    const nextSlideBtn = slider.querySelector(".js-next-btn")
+
+    nextSlideBtn.addEventListener("click", () => {
+        nextSlide(currentSliderContent.length)
+    })
+
+    prevSlideBtn.addEventListener("click", () => {
+        prevSlide(currentSliderContent.length)
+    })
 })
 
-prevSlideBtn.addEventListener("click", () => {
-    prevSlide()
-})
+const allSlidesItemsElems = document.querySelectorAll(".js-slides-item")
 
-for (let id = 0; id < allSlidesElems.length; id++) {
+for (let id = 0; id < allSlidesItemsElems.length; id++) {
     allSlidesIds.push(id)
 }
 
-renderSlidesItems()
-slidesList.style.width = allSlidesIds.length * slideWidth + "px"
-progressBarElem.style.width = (1000 / allSlidesIds.length) + "px"
+pickedSlidesChecker(pickedSlidesIds, allSlidesItemsElems)
+
+progressBarElem.style.width = pickedSlidesIds.length * (1000 / allSlidesIds.length) + "px"
